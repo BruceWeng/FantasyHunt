@@ -18980,7 +18980,7 @@ var HomePage = function (_React$Component) {
         }
       }, {
         id: 2,
-        name: 'Thirdwavefashion',
+        name: 'Third Wave Fashion',
         link: 'https://Thirdwavefashion.com',
         media: '/img/thirdwavefashion.jpeg',
         upvote: 256,
@@ -19025,7 +19025,6 @@ var HomePage = function (_React$Component) {
                     null,
                     _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
                   ),
-                  _react2.default.createElement('br', null),
                   this.state.productList[0].upvote
                 ),
                 _react2.default.createElement('img', { className: 'product-item-media', src: this.state.productList[0].media }),
@@ -19073,7 +19072,6 @@ var HomePage = function (_React$Component) {
                     null,
                     _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
                   ),
-                  _react2.default.createElement('br', null),
                   this.state.productList[1].upvote
                 ),
                 _react2.default.createElement('img', { className: 'product-item-media', src: this.state.productList[1].media }),

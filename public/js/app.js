@@ -18938,7 +18938,7 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":25}],158:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -18946,7 +18946,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -18964,30 +18964,152 @@ var HomePage = function (_React$Component) {
   function HomePage() {
     _classCallCheck(this, HomePage);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(HomePage).call(this));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(HomePage).call(this));
+
+    _this.state = {
+      productList: [{
+        id: 1,
+        name: 'Codecademy',
+        link: 'https://codecademy.com',
+        media: '/img/codecademy.jpeg',
+        upvote: 169,
+        description: 'Code for anyone',
+        maker: {
+          name: 'Bruce',
+          avatar: '/img/profile.jpg'
+        }
+      }, {
+        id: 2,
+        name: 'Thirdwavefashion',
+        link: 'https://Thirdwavefashion.com',
+        media: '/img/thirdwavefashion.jpeg',
+        upvote: 256,
+        description: 'Fashion Tech Startup',
+        maker: {
+          name: 'Ashley',
+          avatar: '/img/ashley.jpeg'
+        }
+      }]
+    };
+    return _this;
   }
 
   _createClass(HomePage, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "section",
+        'section',
         null,
         _react2.default.createElement(
-          "header",
+          'header',
           null,
-          _react2.default.createElement("img", { src: "/img/banner.jpeg", width: "100%" })
+          _react2.default.createElement('img', { src: '/img/banner.jpeg', width: '100%' })
         ),
         _react2.default.createElement(
-          "section",
+          'section',
           null,
           _react2.default.createElement(
-            "section",
-            { className: "container" },
+            'section',
+            { className: 'container' },
             _react2.default.createElement(
-              "h2",
-              null,
-              "ProductList"
+              'ul',
+              { className: 'product-list' },
+              _react2.default.createElement(
+                'li',
+                { className: 'product-item' },
+                _react2.default.createElement(
+                  'a',
+                  { className: 'upvote-button', href: '#' },
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
+                  ),
+                  _react2.default.createElement('br', null),
+                  this.state.productList[0].upvote
+                ),
+                _react2.default.createElement('img', { className: 'product-item-media', src: this.state.productList[0].media }),
+                _react2.default.createElement(
+                  'section',
+                  { className: 'product-item-info' },
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    _react2.default.createElement(
+                      'h2',
+                      null,
+                      this.state.productList[0].name
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    this.state.productList[0].description
+                  ),
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    _react2.default.createElement('img', { className: 'small-avatar', src: this.state.productList[0].maker.avatar })
+                  )
+                ),
+                _react2.default.createElement(
+                  'a',
+                  { className: 'product-item-link', href: this.state.productList[0].link },
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    _react2.default.createElement('i', { className: 'fa fa-external-link' })
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: 'product-item' },
+                _react2.default.createElement(
+                  'a',
+                  { className: 'upvote-button', href: '#' },
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
+                  ),
+                  _react2.default.createElement('br', null),
+                  this.state.productList[1].upvote
+                ),
+                _react2.default.createElement('img', { className: 'product-item-media', src: this.state.productList[1].media }),
+                _react2.default.createElement(
+                  'section',
+                  { className: 'product-item-info' },
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    _react2.default.createElement(
+                      'h2',
+                      null,
+                      this.state.productList[1].name
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    this.state.productList[1].description
+                  ),
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    _react2.default.createElement('img', { className: 'small-avatar', src: this.state.productList[1].maker.avatar })
+                  )
+                ),
+                _react2.default.createElement(
+                  'a',
+                  { className: 'product-item-link', href: this.state.productList[1].link },
+                  _react2.default.createElement(
+                    'span',
+                    null,
+                    _react2.default.createElement('i', { className: 'fa fa-external-link' })
+                  )
+                )
+              )
             )
           )
         )

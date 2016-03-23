@@ -454,3 +454,7 @@ textarea {
    color: #444444;
    text-decoration: none;
  }
+
+ ul {
+   list-style: none;
+ }

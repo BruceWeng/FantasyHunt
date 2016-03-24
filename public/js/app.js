@@ -19058,54 +19058,69 @@ var ProductItem = function (_React$Component) {
   }
 
   _createClass(ProductItem, [{
+    key: "renderUpvoteButton",
+    value: function renderUpvoteButton() {
+      return _react2.default.createElement(
+        "a",
+        { className: "upvote-button", href: "#" },
+        _react2.default.createElement(
+          "span",
+          null,
+          _react2.default.createElement("i", { className: "fa fa-sort-asc" })
+        ),
+        this.props.upvote
+      );
+    }
+  }, {
+    key: "renderNewWindowIcon",
+    value: function renderNewWindowIcon() {
+      return _react2.default.createElement(
+        "a",
+        { className: "product-item-link", href: this.props.link },
+        _react2.default.createElement(
+          "span",
+          null,
+          _react2.default.createElement("i", { className: "fa fa-external-link" })
+        )
+      );
+    }
+  }, {
+    key: "renderinfoSession",
+    value: function renderinfoSession() {
+      return _react2.default.createElement(
+        "section",
+        { className: "product-item-info" },
+        _react2.default.createElement(
+          "a",
+          { href: "#" },
+          _react2.default.createElement(
+            "h2",
+            null,
+            this.props.name
+          )
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          this.props.description
+        ),
+        _react2.default.createElement(
+          "a",
+          { href: "#" },
+          _react2.default.createElement("img", { className: "small-avatar", src: this.props.maker.avatar })
+        )
+      );
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
         "li",
         { className: "product-item" },
-        _react2.default.createElement(
-          "a",
-          { className: "upvote-button", href: "#" },
-          _react2.default.createElement(
-            "span",
-            null,
-            _react2.default.createElement("i", { className: "fa fa-sort-asc" })
-          ),
-          this.props.upvote
-        ),
+        this.renderUpvoteButton(),
         _react2.default.createElement("img", { className: "product-item-media", src: this.props.media }),
-        _react2.default.createElement(
-          "section",
-          { className: "product-item-info" },
-          _react2.default.createElement(
-            "a",
-            { href: "#" },
-            _react2.default.createElement(
-              "h2",
-              null,
-              this.props.name
-            )
-          ),
-          _react2.default.createElement(
-            "p",
-            null,
-            this.props.description
-          ),
-          _react2.default.createElement(
-            "a",
-            { href: "#" },
-            _react2.default.createElement("img", { className: "small-avatar", src: this.props.maker.avatar })
-          )
-        ),
-        _react2.default.createElement(
-          "a",
-          { className: "product-item-link", href: this.props.link },
-          _react2.default.createElement(
-            "span",
-            null,
-            _react2.default.createElement("i", { className: "fa fa-external-link" })
-          )
-        )
+        this.renderinfoSession(),
+        this.renderNewWindowIcon()
       );
     }
   }]);

@@ -19066,7 +19066,7 @@ var Popup = function (_React$Component) {
         _react2.default.createElement(
           "section",
           { className: "popup-wrap" },
-          _react2.default.createElement("img", { src: "/img/close.png" })
+          _react2.default.createElement("img", { src: "/img/close.png", onClick: this.props.hidePopup })
         ),
         _react2.default.createElement(
           "section",
@@ -19085,7 +19085,7 @@ var Popup = function (_React$Component) {
       return _react2.default.createElement(
         "section",
         null,
-        this.renderPopupContent()
+        this.props.status ? this.renderPopupContent() : null
       );
     }
   }]);
@@ -19126,7 +19126,20 @@ var Navbar = function (_React$Component) {
   function Navbar() {
     _classCallCheck(this, Navbar);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Navbar).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navbar).call(this));
+
+    _this.showPopup = function () {
+      _this.setState({ popupStatus: true });
+    };
+
+    _this.hidePopup = function () {
+      _this.setState({ popupStatus: false });
+    };
+
+    _this.state = {
+      popupStatus: false
+    };
+    return _this;
   }
 
   _createClass(Navbar, [{
@@ -19155,7 +19168,7 @@ var Navbar = function (_React$Component) {
         { className: 'right-side' },
         _react2.default.createElement(
           'a',
-          { href: '#', className: 'login-btn' },
+          { href: '#', onClick: this.showPopup, className: 'login-btn' },
           'LOGIN'
         )
       );
@@ -19173,7 +19186,7 @@ var Navbar = function (_React$Component) {
           this.renderLogo(),
           this.renderUser()
         ),
-        _react2.default.createElement(_Popup2.default, null)
+        _react2.default.createElement(_Popup2.default, { status: this.state.popupStatus, hidePopup: this.hidePopup })
       );
     }
   }]);

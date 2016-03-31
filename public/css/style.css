@@ -589,3 +589,25 @@ textarea {
    .navbar .right-side a:hover {
      color: #da552f;
    }
+   /* POPUP
+     ========================================================================== */
+   .popup .popup-wrap {
+     position:fixed;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     left: 0;
+     background-color: white;
+     opacity: 0.97;
+   }
+
+   .popup .popup-wrap img {
+     position fixed;
+     top: 40px;
+     left: 40px;
+     cursor: pointer;
+   }
+
+   .popup .popup-content {
+     position: fixed;
+   }

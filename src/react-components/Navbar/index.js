@@ -1,6 +1,7 @@
 import React from 'react';
 import LoginPopup from './LoginPopup';
 import PostPopup from './PostPopup';
+import ProfileMenu from './ProfileMenu';
 
 class Navbar extends React.Component {
   constructor() {
@@ -42,6 +43,7 @@ class Navbar extends React.Component {
           <section>
             <span>
               <a href="#" onClick={this.showPopup} className="login-btn">POST</a>
+              <ProfileMenu/>
             </span>
             <PostPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
           </section>

@@ -438,7 +438,7 @@ textarea {
 
  h1 {
    font-size: 20px;
-   line-height: 70;
+   line-height: 70px;
    font-weight: 500;
  }
 
@@ -610,4 +610,31 @@ textarea {
 
    .popup .popup-content {
      position: fixed;
+   }
+
+   button {
+     border-radius: 20px;
+     padding: 8px 20px;
+     font-size: 13px;
+     font-weight: 500;
+     outline: 0;
+     border: 0;
+   }
+
+   button:hover {
+     cursor: pointer;
+   }
+
+   .popup-content.login-popup {
+     text-align: center;
+     width: 400px;
+     left: 50%;
+     top: 50%;
+     transform:translate(-50%, -50%);
+   }
+
+   .facebook-btn {
+     color: white;
+     background-color: #3b5998;
+     margin: 20px;
    }

@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginPopup from './LoginPopup';
+import PostPopup from './PostPopup';
 
 class Navbar extends React.Component {
   constructor() {
@@ -34,7 +35,23 @@ class Navbar extends React.Component {
   renderUser() {
     return (
       <section className="right-side">
-        <a href="#" onClick={this.showPopup} className="login-btn">LOGIN</a>
+        {
+          this.props.user
+          ?
+          //Display Post link here
+          <section>
+            <span>
+              <a href="#" onClick={this.showPopup} className="login-btn">POST</a>
+            </span>
+            <PostPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
+          </section>
+          :
+          //Display Login link here
+          <section>
+            <a href="#" onClick={this.showPopup} className="login-btn">LOGIN</a>
+            <LoginPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
+          </section>
+        }
       </section>
     );
   }
@@ -47,7 +64,6 @@ class Navbar extends React.Component {
           {this.renderLogo()}
           {this.renderUser()}
         </section>
-        <LoginPopup status={this.state.popupStatus} hidePopup={this.hidePopup}/>
       </section>
     );
   }

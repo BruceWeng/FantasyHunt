@@ -580,10 +580,10 @@ textarea {
      float: right;
    }
 
-   .navbar .right-side section > * {
+   .navbar .right-side span > * {
      display: inline-block;
      vertical-align: middle;
-     margin-left: 15px;
+     /*margin-left: 15px;*/
    }
 
    .navbar .right-side a:hover {
@@ -602,7 +602,7 @@ textarea {
    }
 
    .popup .popup-wrap img {
-     position fixed;
+     position:fixed;
      top: 40px;
      left: 40px;
      cursor: pointer;
@@ -637,4 +637,66 @@ textarea {
      color: white;
      background-color: #3b5998;
      margin: 20px;
+   }
+
+   /* POST-POPUP
+     ========================================================================== */
+
+   .post-popup {
+     width: 90%;
+     right: 0;
+     top: 0;
+     background-color: white;
+   }
+
+   .post-btn {
+     color: white;
+     background: #5e9aee;
+   }
+
+   .post-popup .post-header {
+     background: #5e9aee;
+     color: white;
+     text-align: center;
+     padding: 20px;
+     height: 20%;
+   }
+
+   .post-popup .post-footer {
+     background: #f2f2f2;
+     text-align: center;
+     padding: 20px 0;
+     height: 10%;
+   }
+
+   .post-popup > section {
+     font-size: 14px;
+     border: 1px solid #f2f2f2;
+     padding: 20px 0;
+     height: 70%;
+     color: #928B8B;
+   }
+
+   .post-popup > section table {
+     width: 100%;
+   }
+
+   .post-popup > section table tr td {
+     padding: 30px;
+   }
+
+   .post-popup > section table tr td:first-child {
+     width: 20%;
+   }
+
+   .post-popup > section table tr td:last-child {
+     width: 80%;
+     border-bottom: 1px solid #f2f2f2;
+   }
+
+   .post-popup > section table input {
+     border: 0;
+     outline: 0;
+     font-size: 13px;
+     width: 100%;
    }

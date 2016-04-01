@@ -19068,7 +19068,7 @@ var LoginPopup = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         _Popup2.default,
-        _extends({}, this.props, { style: 'LoginPopup' }),
+        _extends({}, this.props, { style: 'login-popup' }),
         _react2.default.createElement('img', { src: '/img/kitty.png' }),
         _react2.default.createElement(
           'h1',
@@ -19142,7 +19142,7 @@ var Popup = function (_React$Component) {
         ),
         _react2.default.createElement(
           "section",
-          { className: "popup-content" + this.props.style },
+          { className: "popup-content " + this.props.style },
           _react2.default.createElement(
             "section",
             null,
@@ -19219,7 +19219,7 @@ var PostPopup = function (_React$Component) {
         _extends({}, this.props, { style: 'post-popup' }),
         _react2.default.createElement(
           'header',
-          null,
+          { className: 'post-header' },
           'Post a new product'
         ),
         _react2.default.createElement(

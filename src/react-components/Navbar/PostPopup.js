@@ -3,13 +3,13 @@ import Popup from './Popup';
 
 class PostPopup extends React.Component {
   handlePost = () => {
-    
+
   };
 
   render() {
     return (
       <Popup {...this.props} style="post-popup">
-        <header>Post a new product</header>
+        <header className="post-header">Post a new product</header>
         <section>
           <table>
             <tbody>

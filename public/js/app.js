@@ -19741,20 +19741,78 @@ var ProductPopup = function (_React$Component) {
   function ProductPopup() {
     _classCallCheck(this, ProductPopup);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(ProductPopup).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProductPopup).call(this));
+
+    _this.state = {
+      product: {
+        id: 2,
+        name: 'Third Wave Fashion',
+        link: 'http://Thirdwavefashion.com',
+        media: '/img/thirdwavefashion.jpeg',
+        upvote: 256,
+        description: 'Fashion Tech Startup',
+        maker: {
+          name: 'Ashley',
+          avatar: '/img/ashley.jpeg'
+        }
+      }
+    };
+    return _this;
   }
 
   _createClass(ProductPopup, [{
+    key: 'renderUpvoteButton',
+    value: function renderUpvoteButton() {
+      return _react2.default.createElement(
+        'a',
+        { className: 'upvote-button', href: '#' },
+        _react2.default.createElement(
+          'span',
+          null,
+          _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
+        ),
+        this.state.product.upvote
+      );
+    }
+  }, {
+    key: 'renderHeader',
+    value: function renderHeader() {
+      return _react2.default.createElement(
+        'header',
+        { style: { backgroundImage: 'url(' + this.state.product.media + ')' } },
+        _react2.default.createElement(
+          'section',
+          { className: 'header-shadow' },
+          _react2.default.createElement(
+            'h1',
+            null,
+            this.state.product.name
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.state.product.description
+          ),
+          _react2.default.createElement(
+            'section',
+            null,
+            this.renderUpvoteButton(),
+            _react2.default.createElement(
+              'a',
+              { className: 'getit-btn', href: this.state.product.link, target: '_blank' },
+              'GET IT'
+            )
+          )
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         _Popup2.default,
         _extends({}, this.props, { style: 'product-popup' }),
-        _react2.default.createElement(
-          'h2',
-          null,
-          'Product Info Here'
-        )
+        this.renderHeader()
       );
     }
   }]);

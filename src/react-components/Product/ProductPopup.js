@@ -16,7 +16,19 @@ class ProductPopup extends React.Component {
           name: 'Ashley',
           avatar: '/img/ashley.jpeg'
         }
-      }
+      },
+      comments: [
+        {
+          name: "Ashley",
+          avatar: "/img/ashley.jpeg",
+          content: "I love this product"
+        },
+        {
+          name: "Bruce",
+          avatar: "/img/profile.jpg",
+          content: "Same here"
+        },
+      ]
     }
   }
 
@@ -54,6 +66,7 @@ class ProductPopup extends React.Component {
           <img className="medium-avatar" src="/img/ashley.jpeg"/>
           <input placeholder="what do you think of this product?"/>
         </sction>
+        {this.renderComments()}
       </section>
     );
   }
@@ -68,6 +81,25 @@ class ProductPopup extends React.Component {
     );
   }
 
+  renderComments() {
+    return (
+      <ul className="comment-list">
+        {
+          this.state.comments.map(function(comment, idx) {
+            return (
+              <li key={idx}>
+                <img className="medium-avatar" src={comment.avatar}/>
+                <section>
+                  <strong>{comment.name}</strong>
+                  <p>{comment.content}</p>
+                </section>
+              </li>
+            );
+          })
+        }
+      </ul>
+    )
+  }
   render() {
     return (
       <Popup {...this.props} style="product-popup">

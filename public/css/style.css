@@ -754,6 +754,38 @@ textarea {
      color: white;
    }
 
+   .product-popup .product-popup-body main .discussion {
+     margin: 50px auto;
+     width: 80%;
+   }
+
+   .product-popup .product-popup-body main .discussion h2 {
+     color: #999;
+     padding-bottom: 20px;
+   }
+
+   .product-popup .product-popup-body main .discussion .post-comment {
+     margin: 10px 0;
+     padding: 20px;
+     background-color: #f9f9f9;
+     border-radius: 4px;
+     display: -webkit-flex;
+     display: flex;
+     -webkit-align-items: center;
+     align-items: center;
+   }
+
+   .product-popup .product-popup-body main .discussion .post-comment img {
+     margin-right: 15px;
+   }
+
+   .product-popup .product-popup-body main .discussion .post-comment input {
+     padding: 10px;
+     font-size: 15px;
+     width: 90%;
+     border: 1px solid #f0efef;
+   }
+
    /* PROFILE MENU
      ========================================================================== */
    .profile-menu .profile-btn {

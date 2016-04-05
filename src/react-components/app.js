@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import HomePage from './HomePage';
 import Navbar from './Navbar';
 import connectToStores from 'alt-utils/lib/connectToStores';
-import ProductStore form '../stores/ProductStore';
+import ProductStore from '../stores/ProductStore';
 
 @connectToStores
 class App extends React.Component {

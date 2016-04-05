@@ -5,6 +5,7 @@ import Actions from '../../actions';
 class LoginPopup extends React.Component {
   handleLogin = () => {
     Actions.login();
+    this.props.hidePopup();
   };
 
   render() {

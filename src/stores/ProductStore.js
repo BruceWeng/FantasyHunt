@@ -1,8 +1,8 @@
-import Alt from '../alt';
+import alt from '../alt';
 import Actions from '../actions';
 import {decorate, bind} from 'alt-utils/lib/decorators';
 
-@decorate(alt);
+@decorate(alt)
 class ProductStore {
   constructor() {
     this.state = { user: null};

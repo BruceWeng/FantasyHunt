@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/express-server.js",
-    "build": "browserify -t [ babelify --presets [ es2015 stage-0 react ] ] ./src/react-components/app.js -o ./public/js/app.js",
+    "build": "browserify -t [ babelify --presets [ es2015 stage-0 react ] --plugins [transform-decorators-legacy] ] ./src/react-components/app.js -o ./public/js/app.js",
     "build:watch": "watch 'npm run build' src"
   },
   "author": "",

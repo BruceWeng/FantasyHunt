@@ -1,0 +1,27 @@
+{
+  "products":
+  {
+    "1": {
+      "name": "Codecademy",
+      "link": "https://codecademy.com",
+      "media": "/img/codecademy.jpeg",
+      "upvote": "169",
+      "description": "Code for anyone",
+      "maker": {
+        "name": "Bruce",
+        "avatar": "/img/profile.jpg"
+      }
+    },
+    "2": {
+      "name": "Third Wave Fashion",
+      "link": "http://Thirdwavefashion.com",
+      "media": "/img/thirdwavefashion.jpeg",
+      "upvote": "256",
+      "description": "Fashion Tech Startup",
+      "maker": {
+        "name": "Ashley",
+        "avatar": "/img/ashley.jpeg"
+      }
+    }
+  }
+}

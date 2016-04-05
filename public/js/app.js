@@ -19319,6 +19319,10 @@ var _Popup = require('./Popup');
 
 var _Popup2 = _interopRequireDefault(_Popup);
 
+var _firebase = require('firebase');
+
+var _firebase2 = _interopRequireDefault(_firebase);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19331,9 +19335,26 @@ var LoginPopup = function (_React$Component) {
   _inherits(LoginPopup, _React$Component);
 
   function LoginPopup() {
+    var _Object$getPrototypeO;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, LoginPopup);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(LoginPopup).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(LoginPopup)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.handleLogin = function () {
+      var firebaseRef = new _firebase2.default('https://fantasyhunt.firebaseio.com');
+      firebaseRef.authWithOAuthPopup('facebook', function (error, user) {
+        if (error) {
+          console.log('Failed!', error);
+        } else {
+          console.log('Login Successfully!', user);
+        }
+      });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(LoginPopup, [{
@@ -19355,7 +19376,7 @@ var LoginPopup = function (_React$Component) {
         ),
         _react2.default.createElement(
           'button',
-          { className: 'facebook-btn' },
+          { className: 'facebook-btn', onClick: this.handleLogin },
           'Login with Facebook'
         ),
         _react2.default.createElement(
@@ -19372,7 +19393,7 @@ var LoginPopup = function (_React$Component) {
 
 exports.default = LoginPopup;
 
-},{"./Popup":161,"react":158}],161:[function(require,module,exports){
+},{"./Popup":161,"firebase":1,"react":158}],161:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20211,7 +20232,7 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         'section',
         null,
-        _react2.default.createElement(_Navbar2.default, { user: true }),
+        _react2.default.createElement(_Navbar2.default, { user: false }),
         _react2.default.createElement(_HomePage2.default, null)
       );
     }

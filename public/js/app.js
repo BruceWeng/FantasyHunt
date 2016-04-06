@@ -21153,6 +21153,28 @@ var Actions = function () {
   }
 
   _createClass(Actions, [{
+    key: 'initSession',
+    value: function initSession() {
+      return function (dispatch) {
+        var firebaseRef = new _firebase2.default('https://fantasyhunt.firebaseio.com');
+        var authData = firebaseRef.getAuth();
+        var user;
+
+        if (authData) {
+          user = {
+            id: authData.facebook.id,
+            name: authData.facebook.displayName,
+            avatar: authData.facebook.profileImageURL
+          };
+        } else {
+          user = null;
+        }
+        setTimeout(function () {
+          return dispatch(user);
+        });
+      };
+    }
+  }, {
     key: 'login',
     value: function login() {
       return function (dispatch) {
@@ -21169,6 +21191,17 @@ var Actions = function () {
           };
           firebaseRef.child("users").child(authData.facebook.id).set(user);
           dispatch(user);
+        });
+      };
+    }
+  }, {
+    key: 'logout',
+    value: function logout() {
+      return function (dispatch) {
+        var firebaseRef = new _firebase2.default('https://fantasyhunt.firebaseio.com');
+        firebaseRef.unauth();
+        setTimeout(function () {
+          return dispatch(null);
         });
       };
     }
@@ -21572,7 +21605,7 @@ var PostPopup = function (_React$Component) {
 exports.default = PostPopup;
 
 },{"./Popup":179,"react":174}],181:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -21580,9 +21613,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _actions = require('../../actions');
+
+var _actions2 = _interopRequireDefault(_actions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21614,6 +21651,11 @@ var ProfileMenu = function (_React$Component) {
       }
     };
 
+    _this.handleLogout = function (e) {
+      e.preventDefault();
+      _actions2.default.logout();
+    };
+
     _this.state = {
       showProfileNav: false
     };
@@ -21621,40 +21663,40 @@ var ProfileMenu = function (_React$Component) {
   }
 
   _createClass(ProfileMenu, [{
-    key: "componentWillMount",
+    key: 'componentWillMount',
     value: function componentWillMount() {
       window.addEventListener("click", this.handleClickOutsite, false);
     }
   }, {
-    key: "componentWillUnMount",
+    key: 'componentWillUnMount',
     value: function componentWillUnMount() {
       window.removeEventListener("click", this.handleClickOutsite, false);
     }
   }, {
-    key: "renderProfileNav",
+    key: 'renderProfileNav',
     value: function renderProfileNav() {
       return _react2.default.createElement(
-        "nav",
-        { className: "profile-nav", ref: "profileNav" },
+        'nav',
+        { className: 'profile-nav', ref: 'profileNav' },
         _react2.default.createElement(
-          "a",
-          { href: "#" },
-          "My Profile"
+          'a',
+          { href: '#' },
+          'My Profile'
         ),
         _react2.default.createElement(
-          "a",
-          { href: "#" },
-          "Logout"
+          'a',
+          { href: '#', onClick: this.handleLogout },
+          'Logout'
         )
       );
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "section",
-        { className: "profile-menu" },
-        _react2.default.createElement("img", { src: this.props.user.avatar, onClick: this.handleClick, className: "profile-btn medium-avatar", ref: "profileBtn" }),
+        'section',
+        { className: 'profile-menu' },
+        _react2.default.createElement('img', { src: this.props.user.avatar, onClick: this.handleClick, className: 'profile-btn medium-avatar', ref: 'profileBtn' }),
         this.state.showProfileNav ? this.renderProfileNav() : null
       );
     }
@@ -21665,7 +21707,7 @@ var ProfileMenu = function (_React$Component) {
 
 exports.default = ProfileMenu;
 
-},{"react":174}],182:[function(require,module,exports){
+},{"../../actions":175,"react":174}],182:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22188,6 +22230,10 @@ var _ProductStore = require('../stores/ProductStore');
 
 var _ProductStore2 = _interopRequireDefault(_ProductStore);
 
+var _actions = require('../actions');
+
+var _actions2 = _interopRequireDefault(_actions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22202,7 +22248,10 @@ var App = (0, _connectToStores2.default)(_class = function (_React$Component) {
   function App() {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
+
+    _actions2.default.initSession();
+    return _this;
   }
 
   _createClass(App, [{
@@ -22232,7 +22281,7 @@ var App = (0, _connectToStores2.default)(_class = function (_React$Component) {
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));
 
-},{"../stores/ProductStore":187,"./HomePage":177,"./Navbar":182,"alt-utils/lib/connectToStores":1,"react":174,"react-dom":18}],187:[function(require,module,exports){
+},{"../actions":175,"../stores/ProductStore":187,"./HomePage":177,"./Navbar":182,"alt-utils/lib/connectToStores":1,"react":174,"react-dom":18}],187:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22286,7 +22335,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
   return desc;
 }
 
-var ProductStore = (_dec = (0, _decorators.decorate)(_alt2.default), _dec2 = (0, _decorators.bind)(_actions2.default.login), _dec(_class = (_class2 = function () {
+var ProductStore = (_dec = (0, _decorators.decorate)(_alt2.default), _dec2 = (0, _decorators.bind)(_actions2.default.login, _actions2.default.initSession, _actions2.default.logout), _dec(_class = (_class2 = function () {
   function ProductStore() {
     _classCallCheck(this, ProductStore);
 
@@ -22294,14 +22343,14 @@ var ProductStore = (_dec = (0, _decorators.decorate)(_alt2.default), _dec2 = (0,
   }
 
   _createClass(ProductStore, [{
-    key: 'login',
-    value: function login(user) {
+    key: 'setUser',
+    value: function setUser(user) {
       this.setState({ user: user });
     }
   }]);
 
   return ProductStore;
-}(), (_applyDecoratedDescriptor(_class2.prototype, 'login', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'login'), _class2.prototype)), _class2)) || _class);
+}(), (_applyDecoratedDescriptor(_class2.prototype, 'setUser', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'setUser'), _class2.prototype)), _class2)) || _class);
 exports.default = _alt2.default.createStore(ProductStore);
 
 },{"../actions":175,"../alt":176,"alt-utils/lib/decorators":2}],188:[function(require,module,exports){

@@ -4,11 +4,13 @@ import HomePage from './HomePage';
 import Navbar from './Navbar';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import ProductStore from '../stores/ProductStore';
+import Actions from '../actions';
 
 @connectToStores
 class App extends React.Component {
   constructor() {
     super();
+    Actions.initSession();
   }
 
   static getStores() {

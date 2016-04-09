@@ -48,6 +48,16 @@ class Actions {
       setTimeout(() => dispatch(null));
     }
   }
+
+  getProducts() {
+    return (dispatch) => {
+      var firebaseRef = new Firebase('https://fantasyhunt.firebaseio.com/products');
+      firebaseRef.on('value', (snapshot) => {
+        var products = snapshot.val();
+        dispatch(products);
+      });
+    }
+  }
 }
 
 export default alt.createActions(Actions);

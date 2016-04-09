@@ -21205,6 +21205,17 @@ var Actions = function () {
         });
       };
     }
+  }, {
+    key: 'getProducts',
+    value: function getProducts() {
+      return function (dispatch) {
+        var firebaseRef = new _firebase2.default('https://fantasyhunt.firebaseio.com/products');
+        firebaseRef.on('value', function (snapshot) {
+          var products = snapshot.val();
+          dispatch(products);
+        });
+      };
+    }
   }]);
 
   return Actions;
@@ -21236,6 +21247,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _class;
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -21248,6 +21261,18 @@ var _firebase = require('firebase');
 
 var _firebase2 = _interopRequireDefault(_firebase);
 
+var _connectToStores = require('alt-utils/lib/connectToStores');
+
+var _connectToStores2 = _interopRequireDefault(_connectToStores);
+
+var _ProductStore = require('../../stores/ProductStore');
+
+var _ProductStore2 = _interopRequireDefault(_ProductStore);
+
+var _actions = require('../../actions');
+
+var _actions2 = _interopRequireDefault(_actions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21256,7 +21281,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var HomePage = function (_React$Component) {
+var HomePage = (0, _connectToStores2.default)(_class = function (_React$Component) {
   _inherits(HomePage, _React$Component);
 
   function HomePage() {
@@ -21264,18 +21289,7 @@ var HomePage = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(HomePage).call(this));
 
-    _this.state = {
-      productList: []
-    };
-
-    var firebaseRef = new _firebase2.default('https://fantasyhunt.firebaseio.com/products');
-    firebaseRef.on('value', function (snapshot) {
-      var products = snapshot.val();
-
-      _this.setState({
-        productList: products
-      });
-    });
+    _actions2.default.getProducts();
     return _this;
   }
 
@@ -21296,19 +21310,29 @@ var HomePage = function (_React$Component) {
           _react2.default.createElement(
             'section',
             { className: 'container' },
-            this.state.productList ? _react2.default.createElement(_ProductList2.default, { productList: this.state.productList }) : null
+            this.props.products ? _react2.default.createElement(_ProductList2.default, { productList: this.props.products }) : null
           )
         )
       );
     }
+  }], [{
+    key: 'getStores',
+    value: function getStores() {
+      return [_ProductStore2.default];
+    }
+  }, {
+    key: 'getPropsFromStores',
+    value: function getPropsFromStores() {
+      return _ProductStore2.default.getState();
+    }
   }]);
 
   return HomePage;
-}(_react2.default.Component);
+}(_react2.default.Component)) || _class;
 
 exports.default = HomePage;
 
-},{"../Product/ProductList":184,"firebase":17,"react":174}],178:[function(require,module,exports){
+},{"../../actions":175,"../../stores/ProductStore":187,"../Product/ProductList":184,"alt-utils/lib/connectToStores":1,"firebase":17,"react":174}],178:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -22290,7 +22314,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _dec, _dec2, _class, _desc, _value, _class2;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2;
 
 var _alt = require('../alt');
 
@@ -22335,11 +22359,14 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
   return desc;
 }
 
-var ProductStore = (_dec = (0, _decorators.decorate)(_alt2.default), _dec2 = (0, _decorators.bind)(_actions2.default.login, _actions2.default.initSession, _actions2.default.logout), _dec(_class = (_class2 = function () {
+var ProductStore = (_dec = (0, _decorators.decorate)(_alt2.default), _dec2 = (0, _decorators.bind)(_actions2.default.login, _actions2.default.initSession, _actions2.default.logout), _dec3 = (0, _decorators.bind)(_actions2.default.getProducts), _dec(_class = (_class2 = function () {
   function ProductStore() {
     _classCallCheck(this, ProductStore);
 
-    this.state = { user: null };
+    this.state = {
+      user: null,
+      products: []
+    };
   }
 
   _createClass(ProductStore, [{
@@ -22347,10 +22374,15 @@ var ProductStore = (_dec = (0, _decorators.decorate)(_alt2.default), _dec2 = (0,
     value: function setUser(user) {
       this.setState({ user: user });
     }
+  }, {
+    key: 'getProducts',
+    value: function getProducts(products) {
+      this.setState({ products: products });
+    }
   }]);
 
   return ProductStore;
-}(), (_applyDecoratedDescriptor(_class2.prototype, 'setUser', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'setUser'), _class2.prototype)), _class2)) || _class);
+}(), (_applyDecoratedDescriptor(_class2.prototype, 'setUser', [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, 'setUser'), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, 'getProducts', [_dec3], Object.getOwnPropertyDescriptor(_class2.prototype, 'getProducts'), _class2.prototype)), _class2)) || _class);
 exports.default = _alt2.default.createStore(ProductStore);
 
 },{"../actions":175,"../alt":176,"alt-utils/lib/decorators":2}],188:[function(require,module,exports){

@@ -54,7 +54,14 @@ class Actions {
     return (dispatch) => {
       var firebaseRef = new Firebase('https://fantasyhunt.firebaseio.com/products');
       firebaseRef.on('value', (snapshot) => {
-        var products = _.values(snapshot.val());
+        // var products = _.values(snapshot.val()); products in array without keys
+        var productsValue = snapshot.val();
+        var products = _(productsValue).keys().map((productKey) => {
+          var item = _.clone(productsValue[productKey]);
+          item.key = productKey;
+          return item;
+        })
+        .value();
         dispatch(products);
       });
     }
@@ -64,6 +71,19 @@ class Actions {
     return (dispatch) => {
       var firebaseRef = new Firebase('https://fantasyhunt.firebaseio.com/products');
       firebaseRef.push(product);
+    }
+  }
+
+  addVote(productId, userId) {
+    return (dispatch) => {
+      var firebaseRef = new Firebase('https://fantasyhunt.firebaseio.com');
+      firebaseRef = firebaseRef.child('products').child(productId).child('upvote');
+
+      var vote = 0;
+      firebaseRef.on('value', (snapshot) => {
+        vote = snapshot.val();
+      });
+      firebaseRef.set(vote+1);
     }
   }
 }

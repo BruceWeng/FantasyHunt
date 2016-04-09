@@ -58,6 +58,13 @@ class Actions {
       });
     }
   }
+
+  addProduct(product) {
+    return (dispatch) => {
+      var firebaseRef = new Firebase('https://fantasyhunt.firebaseio.com/products');
+      firebaseRef.push(product);
+    }
+  }
 }
 
 export default alt.createActions(Actions);

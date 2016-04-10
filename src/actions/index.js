@@ -77,13 +77,21 @@ class Actions {
   addVote(productId, userId) {
     return (dispatch) => {
       var firebaseRef = new Firebase('https://fantasyhunt.firebaseio.com');
-      firebaseRef = firebaseRef.child('products').child(productId).child('upvote');
 
-      var vote = 0;
-      firebaseRef.on('value', (snapshot) => {
-        vote = snapshot.val();
+      var voteRef = firebaseRef.child('votes').child(productId).child(userId);
+      voteRef.on('value', (snapshot) => {
+        if(snapshot.val() == null) {
+          voteRef.set(true);
+
+          firebaseRef = firebaseRef.child('products').child(productId).child('upvote');
+
+          var vote = 0;
+          firebaseRef.on('value', (snapshot) => {
+            vote = snapshot.val();
+          });
+          firebaseRef.set(vote+1);
+        }
       });
-      firebaseRef.set(vote+1);
     }
   }
 }

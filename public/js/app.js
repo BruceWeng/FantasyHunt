@@ -37194,13 +37194,21 @@ var Actions = function () {
     value: function addVote(productId, userId) {
       return function (dispatch) {
         var firebaseRef = new _firebase2.default('https://fantasyhunt.firebaseio.com');
-        firebaseRef = firebaseRef.child('products').child(productId).child('upvote');
 
-        var vote = 0;
-        firebaseRef.on('value', function (snapshot) {
-          vote = snapshot.val();
+        var voteRef = firebaseRef.child('votes').child(productId).child(userId);
+        voteRef.on('value', function (snapshot) {
+          if (snapshot.val() == null) {
+            voteRef.set(true);
+
+            firebaseRef = firebaseRef.child('products').child(productId).child('upvote');
+
+            var vote = 0;
+            firebaseRef.on('value', function (snapshot) {
+              vote = snapshot.val();
+            });
+            firebaseRef.set(vote + 1);
+          }
         });
-        firebaseRef.set(vote + 1);
       };
     }
   }]);
@@ -37874,6 +37882,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _class;
@@ -37923,7 +37933,7 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
     };
 
     _this.handleVote = function () {
-      _actions2.default.addVote(_this.props.pid, _this.props.user);
+      _actions2.default.addVote(_this.props.pid, _this.props.user.id);
     };
 
     _this.state = {
@@ -37996,7 +38006,7 @@ var ProductItem = (0, _connectToStores2.default)(_class = function (_React$Compo
         _react2.default.createElement('img', { className: 'product-item-media', src: this.props.media }),
         this.renderinfoSession(),
         this.renderNewWindowIcon(),
-        _react2.default.createElement(_ProductPopup2.default, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup })
+        _react2.default.createElement(_ProductPopup2.default, _extends({}, this.props, { status: this.state.productPopupStatus, hidePopup: this.hideProductPopup }))
       );
     }
   }], [{
@@ -38106,18 +38116,6 @@ var ProductPopup = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProductPopup).call(this));
 
     _this.state = {
-      product: {
-        id: 2,
-        name: 'Third Wave Fashion',
-        link: 'http://Thirdwavefashion.com',
-        media: '/img/thirdwavefashion.jpeg',
-        upvote: 256,
-        description: 'Fashion Tech Startup',
-        maker: {
-          name: 'Ashley',
-          avatar: '/img/ashley.jpeg'
-        }
-      },
       comments: [{
         name: "Ashley",
         avatar: "/img/ashley.jpeg",
@@ -38142,7 +38140,7 @@ var ProductPopup = function (_React$Component) {
           null,
           _react2.default.createElement('i', { className: 'fa fa-sort-asc' })
         ),
-        this.state.product.upvote
+        this.props.upvote
       );
     }
   }, {
@@ -38150,19 +38148,19 @@ var ProductPopup = function (_React$Component) {
     value: function renderHeader() {
       return _react2.default.createElement(
         'header',
-        { style: { backgroundImage: 'url(' + this.state.product.media + ')' } },
+        { style: { backgroundImage: 'url(' + this.props.media + ')' } },
         _react2.default.createElement(
           'section',
           { className: 'header-shadow' },
           _react2.default.createElement(
             'h1',
             null,
-            this.state.product.name
+            this.props.name
           ),
           _react2.default.createElement(
             'p',
             null,
-            this.state.product.description
+            this.props.description
           ),
           _react2.default.createElement(
             'section',
@@ -38170,7 +38168,7 @@ var ProductPopup = function (_React$Component) {
             this.renderUpvoteButton(),
             _react2.default.createElement(
               'a',
-              { className: 'getit-btn', href: this.state.product.link, target: '_blank' },
+              { className: 'getit-btn', href: this.props.link, target: '_blank' },
               'GET IT'
             )
           )

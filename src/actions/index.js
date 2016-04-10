@@ -101,6 +101,23 @@ class Actions {
       firebaseRef.child(productId).push(comment);
     }
   }
+
+  getComments(productId) {
+    return (dispatch) => {
+      var firebaseRef = new Firebase('https://fantasyhunt.firebaseio.com/comments');
+      firebaseRef.child(productId).on('value', (snapshot) => {
+        var commentsVal = snapshot.val();
+        var comments = _(commentsVal).keys().map((commentKey) => {
+          var item = _.clone(commentsVal[commentKey]);
+          item.key = commentKey;
+          return item;
+        })
+        .value();
+
+        dispatch(comments);
+      });
+    }
+  }
 }
 
 export default alt.createActions(Actions);

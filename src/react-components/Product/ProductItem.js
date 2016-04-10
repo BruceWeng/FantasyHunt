@@ -1,24 +1,12 @@
 import React from 'react';
 import ProductPopup from './ProductPopup';
-import Actions from '../../actions';
-import connectToStores from 'alt-utils/lib/connectToStores';
-import ProductStore from '../../stores/ProductStore';
-
-@connectToStores
+import Upvote from './Upvote';
 class ProductItem extends React.Component {
   constructor() {
     super();
     this.state = {
       productPopupStatus: false
     }
-  }
-
-  static getStores() {
-    return [ProductStore];
-  }
-
-  static getPropsFromStores() {
-    return ProductStore.getState();
   }
 
   showProductPopup = () => {
@@ -28,20 +16,6 @@ class ProductItem extends React.Component {
   hideProductPopup = () => {
     this.setState({productPopupStatus: false});
   };
-
-  handleVote = () => {
-    Actions.addVote(this.props.pid, this.props.user.id);
-  };
-  renderUpvoteButton() {
-    return (
-      <a className="upvote-button" href="#" onClick={this.handleVote}>
-        <span>
-          <i className="fa fa-sort-asc"></i>
-        </span>
-        {this.props.upvote}
-      </a>
-    );
-  }
 
   renderNewWindowIcon() {
     return (
@@ -69,7 +43,7 @@ class ProductItem extends React.Component {
   render() {
     return (
       <li className="product-item">
-        {this.renderUpvoteButton()}
+        <Upvote {...this.props} />
         <img className="product-item-media" src={this.props.media} />
         {this.renderinfoSession()}
         {this.renderNewWindowIcon()}

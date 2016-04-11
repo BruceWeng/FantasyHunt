@@ -87,7 +87,7 @@ class ProductPopup extends React.Component {
     return (
       <ul className="comment-list">
         {
-          this.state.comments.map(function(comment, idx) {
+          this.props.comments.map(function(comment, idx) {
             return (
               <li key={idx}>
                 <img className="medium-avatar" src={comment.avatar}/>

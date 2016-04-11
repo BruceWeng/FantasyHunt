@@ -37839,7 +37839,7 @@ var Navbar = function (_React$Component) {
       return _react2.default.createElement(
         'a',
         { href: '#' },
-        _react2.default.createElement('img', { src: '/img/F.ico' })
+        _react2.default.createElement('img', { src: '/img/favicon.ico' })
       );
     }
   }, {
@@ -37887,7 +37887,6 @@ var Navbar = function (_React$Component) {
         _react2.default.createElement(
           'section',
           { className: 'navbar' },
-          this.renderProductSearch(),
           this.renderLogo(),
           this.renderUser()
         )
@@ -38215,7 +38214,7 @@ var ProductPopup = (0, _connectToStores2.default)(_class = function (_React$Comp
       return _react2.default.createElement(
         'ul',
         { className: 'comment-list' },
-        this.state.comments.map(function (comment, idx) {
+        this.props.comments.map(function (comment, idx) {
           return _react2.default.createElement(
             'li',
             { key: idx },

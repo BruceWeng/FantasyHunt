@@ -20,7 +20,7 @@
     "babelify": "^7.2.0",
     "express": "^4.13.4",
     "firebase": "^2.4.2",
-    "lodash": "^4.9.0",
+    "lodash": "^4.5.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "watch": "^0.17.1"

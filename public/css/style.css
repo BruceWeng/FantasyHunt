@@ -553,6 +553,7 @@ textarea {
      font-weight: 500;
      font-size: 11px;
      display: block;
+     padding-top: 5px;
    }
 
    .login-btn:hover {

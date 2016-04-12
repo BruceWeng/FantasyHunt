@@ -66,7 +66,7 @@ class ProductPopup extends React.Component {
             <input placeholder="what do you think of this product?" onKeyUp={this.handleComment}/>
           </section>
           :
-          null
+          <h3>Login to join discussion!</h3>
         }
         {this.renderComments()}
       </section>

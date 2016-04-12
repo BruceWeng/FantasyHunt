@@ -36365,7 +36365,7 @@ var LoginPopup = function (_React$Component) {
         _react2.default.createElement(
           'p',
           null,
-          'FantasyHunt is a Community to share and evalutate the latest startup idea. Join us :)'
+          'CodeHunt is a Community to share and evalutate the latest startup idea. Join us :)'
         ),
         _react2.default.createElement(
           'button',
@@ -37138,7 +37138,11 @@ var ProductPopup = (0, _connectToStores2.default)(_class = function (_React$Comp
           { className: 'post-comment' },
           _react2.default.createElement('img', { className: 'medium-avatar', src: this.props.user.avatar }),
           _react2.default.createElement('input', { placeholder: 'what do you think of this product?', onKeyUp: this.handleComment })
-        ) : null,
+        ) : _react2.default.createElement(
+          'h3',
+          null,
+          'Login to join discussion!'
+        ),
         this.renderComments()
       );
     }
